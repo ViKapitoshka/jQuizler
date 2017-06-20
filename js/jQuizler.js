@@ -27,11 +27,11 @@
             $(this).click(function(){
                 $(this).off('click');
 
-                $(".intro").hide();
+                $(".intro").hide(); // intro скрывается
                 $(this).css("text-align", "left");
                 $('.progress').css("display", "block");
 
-                var question = $("#question-1");
+                var question = $("#question-1"); //переменная вопрос
 
                 question.css({opacity : '0', height : '0px'});
 
@@ -43,11 +43,11 @@
                 question.css('display', 'block');
 
                 percentage += percentPiece;
-                $(".progress div").css("width", percentage + "%");
-            });
+                $(".progress div").css("width", percentage + "%"); //проценты для прогресса
+            }); // end закрытие интро
 
             (function($){
-                $.shuffle = function(arr) {
+                $.shuffle = function(arr) { //перетасовка ответов
                     for(
                             var j, x, i = arr.length; i;
                             j = parseInt(Math.random() * i),
@@ -75,10 +75,11 @@
 
                     html += question.question;
 
-                    var correctAnswers = [];
+                    var correctAnswers = []; // массив правильных ответов
                     for (var i = 0; i < question.correct.length; i++)
                         correctAnswers.push(question.answers[question.correct[i] - 1]);
 
+                    // перемешивание ответов
                     question.answers = $.shuffle(question.answers);
 
                     var correctAnswersNewIndexes = [];
@@ -90,16 +91,20 @@
                     /*for (var i = 0; i < question.correct.length; i++)
                      console.log(question.answers[correctAnswersNewIndexes[i]]);*/
 
+                    // добавляется список ответов 
                     html += "<ul class=\"answers\">";
 
                     for (var i = 0; i < question.answers.length; i++)
                         html += "<li class=\"btn\">" + question.answers[i] + "</li>";
 
                     html += "</ul>";
+
+                    // добавляется блок для уведомления о том, что не выбран ответ
                     html += "<div class=\"nav-container\">";
 
                     html += "<div class=\"notice alert alert-info\">Выберите ответ</div>";
 
+                    // кнопки след, пред вопросы и результат
                     if (index != 0) {
                         html += "<button class=\"prev btn btn-info\"><i class='icon-arrow-left icon-white'></i> Предыдущий</button>";
                     }
@@ -119,7 +124,7 @@
                 });
 
 
-
+                // добавляется прогресс бар
                 html += "<div class=\"progress progress-info progress-striped\">";
                 html += "<div id=\"percent\" class=\"bar\" style=\"width: 0%;\"></div>";
                 html += "</div>";
@@ -131,8 +136,8 @@
                     if (!reviewQuiz) {
                         /*$(this).siblings().removeClass("selected");
                         $(this).toggleClass("selected");*/
-
-                        $(this).siblings().removeClass("btn-info");
+                        // удалила нижнюю строку, чтобы была возможность выбора нескольких ответов
+                        //$(this).siblings().removeClass("btn-info");
                         $(this).toggleClass("btn-info");
                     }
                 });
